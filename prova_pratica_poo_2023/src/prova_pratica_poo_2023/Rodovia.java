@@ -1,6 +1,7 @@
 package prova_pratica_poo_2023;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Rodovia {
@@ -42,19 +43,90 @@ public class Rodovia {
         this.acidentes = acidentes;
     }
 
-	public String contarAcidentesComBicicletas() {
-		return null;
-	}
+    public int contarAcidentesComVitimasFatais() {
+        int totalAcidentesFatais = 0;
+        for (Acidente acidente : acidentes) {
+            totalAcidentesFatais += acidente.getVitimasFatais();
+        }
+        return totalAcidentesFatais;
+    }
 
-	public int contarAcidentesComVitimasFatais() {
-		return 0;
-	}
+    public int contarAcidentesComVeiculosNovos(int ano) {
+        int totalAcidentesVeiculosNovos = 0;
+        for (Acidente acidente : acidentes) {
+            for (Veiculo veiculo : acidente.getVeiculosEnvolvidos()) {
+                if (veiculo.getAnoFabricacao() == ano) {
+                    totalAcidentesVeiculosNovos++;
+                    break; 
+                }
+            }
+        }
+        return totalAcidentesVeiculosNovos;
+    }
 
-	public String contarAcidentesComVeiculosNovos(int i) {
-		return null;
-	}
-
+    public int contarAcidentesComBicicletas() {
+        int totalAcidentesBicicletas = 0;
+        for (Acidente acidente : acidentes) {
+            for (Veiculo veiculo : acidente.getVeiculosEnvolvidos()) {
+                if (veiculo instanceof Bicicleta) {
+                    totalAcidentesBicicletas++;
+                    break; 
+                }
+            }
+        }
+        return totalAcidentesBicicletas;
+    }
+    
 	public static List<Rodovia> rodoviasComAcidentesNoCarnaval(List<Rodovia> of, int i) {
 		return null;
 	}
+
+	public Rodovia listarAcidentesNoCarnaval() {
+		return null;
+	}
+
+	public Rodovia getRodovia() {
+		return null;
+	}
+
+	public Rodovia listarAcidentesNoCarnaval1() {
+		return null;
+	}
+	
+	public int contarAcidentesNoCarnaval() {
+        int totalAcidentesCarnaval = 0;
+        for (Acidente acidente : acidentes) {
+            if (acidente.ocorreuNoCarnaval()) {
+                totalAcidentesCarnaval++;
+            }
+        }
+		return totalAcidentesCarnaval;
+    }
+	public void listarAcidentesComCondutorEmbriagado() {
+        for (Acidente acidente : acidentes) {
+            boolean condutorEmbriagado = acidente.verificarCondutorEmbriagado();
+            if (condutorEmbriagado) {
+                System.out.println("Acidente na rodovia " + sigla + " onde algum condutor estava embriagado:");
+                System.out.println("Quantidade de vitimas fatais: " + acidente.getVitimasFatais());
+            }
+            
+        }
+    }
+	public void listarAcidentesPorNivelPericulosidade() {
+        System.out.println("Rodovia " + sigla);
+        System.out.println("Acidentes por nivel de periculosidade:");
+
+        for (String nivel : Arrays.asList("baixo", "medio", "alto")) {
+            System.out.println("Nivel de periculosidade: " + nivel);
+            for (Acidente acidente : acidentes) {
+                if (acidente.getRodovia().equals(this) && acidente.getRodovia().getGrauPericulosidade().equals(nivel)) {
+                    System.out.println("Acidente na rodovia " + sigla);
+                    System.out.println("Quantidade de vitimas fatais: " + acidente.getVitimasFatais());
+                }
+            }
+        }
+    }
 }
+
+
+

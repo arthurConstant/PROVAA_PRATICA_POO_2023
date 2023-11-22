@@ -66,6 +66,15 @@ public class Acidente {
 	public void setVeiculosEn(Object veiculosEn) {
 		this.veiculosEn = veiculosEn;
 	}
+	
+	public boolean ocorreuNoCarnaval() {
+        return this.mes == 2; 
+    }
+
+	public boolean verificarCondutorEmbriagado() {
+		return false;
+	}
 }
+
         
   

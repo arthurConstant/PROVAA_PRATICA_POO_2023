@@ -3,7 +3,10 @@ package prova_pratica_poo_2023;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    private static List<Rodovia> acidentesNoCarnaval;
+	private static List<Rodovia> rodoviasNoCarnaval;
+
+	public static void main(String[] args) {
 
         Rodovia br101 = new Rodovia("BR-101", "alto");
         Rodovia br116 = new Rodovia("BR-116", "médio");
@@ -27,14 +30,33 @@ public class Main {
 
         br116.cadastrarAcidente(acidente2);
 
-        System.out.println("Quantidade de acidentes com bicicletas na BR-101: " + br101.contarAcidentesComBicicletas());
+        System.out.println("acidentes com bicicletas na BR-101: " + br101.contarAcidentesComBicicletas());
         System.out.println("Rodovia com mais acidentes fatais: " + (br101.contarAcidentesComVitimasFatais() > br116.contarAcidentesComVitimasFatais() ? br101.getSigla() : br116.getSigla()));
-        System.out.println("Quantidade de acidentes com veículos novos em 2023: " + br101.contarAcidentesComVeiculosNovos(2023));
+        System.out.println("acidentes com veiculos novos em 2023: " + br101.contarAcidentesComVeiculosNovos(2023));
 
-        List<Rodovia> rodoviasNoCarnaval = Rodovia.rodoviasComAcidentesNoCarnaval(List.of(br101, br116), 2);
-        System.out.println("Rodovias com acidentes no carnaval:");
-        for (Rodovia rodovia : rodoviasNoCarnaval) {
-            System.out.println(rodovia.getSigla());
-        }
-    }
+        setRodoviasNoCarnaval(Rodovia.rodoviasComAcidentesNoCarnaval(List.of(br101, br116), 2));
+        System.out.println("Rodovias com acidentes no carnaval:"+ (br101.contarAcidentesComVitimasFatais() > br116.contarAcidentesComVitimasFatais() ? br101.getSigla() : br116.getSigla()));
+        br101.listarAcidentesComCondutorEmbriagado();
+        br116.listarAcidentesComCondutorEmbriagado();
+        
+        br101.listarAcidentesPorNivelPericulosidade();
+        br116.listarAcidentesPorNivelPericulosidade();
+        
+	}
+
+	public static List<Rodovia> getAcidentesNoCarnaval() {
+		return acidentesNoCarnaval;
+	}
+
+	public static void setAcidentesNoCarnaval(List<Rodovia> acidentesNoCarnaval) {
+		Main.acidentesNoCarnaval = acidentesNoCarnaval;
+	}
+
+	public static List<Rodovia> getRodoviasNoCarnaval() {
+		return rodoviasNoCarnaval;
+	}
+
+	public static void setRodoviasNoCarnaval(List<Rodovia> rodoviasNoCarnaval) {
+		Main.rodoviasNoCarnaval = rodoviasNoCarnaval;
+	}
 }
